@@ -19,9 +19,10 @@ def main():
 	parser.add_argument('-d', '--dest', type=str, default='/')
 	parser.add_argument('-t', '--type', type=str, default='mp4')
 	args = parser.parse_args()
-
+	if args.dest == '/':
+		args.dest = args.source
 	fs_crawler = FileSystemCrawler(args.source, args.dest, args.type)
-	fs_crawler.printt()
+	fs_crawler.preformMove()
 
 def parse_arguments():
 	print(sys.argv[1])
