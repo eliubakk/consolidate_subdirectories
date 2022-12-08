@@ -5,7 +5,7 @@ class FileSystemCrawler:
 		self.root = _root
 		self.dest = _dest
 		self.file_type = _file_type
-		self.dirTree = FileSystemTree(_root)
+		self.dirTree = FileSystemTree(_root, _dest, _file_type)
 
 	def printt(self):
 		self.dirTree.printt()
