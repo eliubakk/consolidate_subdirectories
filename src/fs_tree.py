@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 class TreeNode:
     def __init__(self, data):
@@ -18,17 +19,20 @@ class TreeNode:
             p = p.parent
         return level
 
-    def has_children():
+    def has_children(self):
         return bool(children)
 
-    # def moveTo(dest):
-    #     prefix = (" " * 4 * self.getlevel()) + ("|--" if self.parent else "")
-    #     (prefix + self.data)
-    #     if self.children:
-    #         for child in self.children:
-    #             child.moveTo()
-    #     else
-    #         os.
+    def moveTo(self, dest, filetype):
+        prefix = (" " * 4 * self.getlevel()) + ("|--" if self.parent else "")
+        path = Path(self.data)
+        parent_dir = os.path.split(path.parent)
+        file_name = os.path.split(path)[1]
+        if not os.path.isdir(self.data) and self.data.endswith(filetype):
+            print("Move " + str(path) + " -> " + dest + '/' + parent_dir[1]+ '_' + file_name)
+            os.rename(str(path), dest + '/' + parent_dir[1]+ '_' + file_name)
+        if self.children:
+            for child in self.children:
+                child.moveTo(dest,filetype)
 
     def printt(self):
         prefix = (" " * 4 * self.getlevel()) + ("|--" if self.parent else "")
@@ -47,11 +51,7 @@ class FileSystemTree:
     def __createTree(self, node):
         subdirectories = os.listdir(node.data)
         for directory in subdirectories:
-            if (os.path.isfile(node.data + '/' + directory) and directory.endswith(self.filetype)):
-                child = TreeNode(node.data + '_' + directory)
-                child.parent = node
-                node.add_child(child)
-            elif (os.path.isdir(node.data + '/' + directory)):
+            if os.path.isdir(node.data + '/' + directory) or (not os.path.isdir(node.data + '/' + directory) and directory.endswith(self.filetype)):
                 child = TreeNode(node.data + '/' + directory)
                 child.parent = node
                 node.add_child(child)
@@ -59,8 +59,8 @@ class FileSystemTree:
             if os.path.isdir(children.data):
                 self.__createTree(children)
 
-    # def moveToDest():
-    #     self.root.moveTo(self.dest)
+    def moveToDest(self):
+        self.root.moveTo(self.dest, self.filetype)
 
     def printt(self):
         self.root.printt()

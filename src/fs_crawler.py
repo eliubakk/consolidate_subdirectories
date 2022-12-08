@@ -7,5 +7,8 @@ class FileSystemCrawler:
 		self.file_type = _file_type
 		self.dirTree = FileSystemTree(_root, _dest, _file_type)
 
+	def preformMove(self):
+		self.dirTree.moveToDest()
+
 	def printt(self):
 		self.dirTree.printt()
