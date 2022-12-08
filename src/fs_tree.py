@@ -28,14 +28,17 @@ class TreeNode:
 class FileSystemTree:
     def __init__(self, _root):
         self.root = TreeNode(_root)
-        self.__createTree()
+        self.__createTree(self.root)
     
-    def __createTree(self):
-        subdirectories = os.listdir(self.root.data)
+    def __createTree(self, node):
+        subdirectories = os.listdir(node.data)
         for directory in subdirectories:
-            child = TreeNode(directory)
-            child.parent = self.root
-            self.root.add_child(child)
+            child = TreeNode(node.data + '/' + directory)
+            child.parent = node
+            node.add_child(child)
+        for children in node.children:
+            if os.path.isdir(children.data):
+                self.__createTree(children)
 
     def printt(self):
         self.root.printt()
