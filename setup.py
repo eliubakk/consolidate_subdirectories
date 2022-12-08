@@ -1,13 +1,3 @@
- 
-Latest commit  on Aug 28, 2017
-History
- 2 contributors
-Executable File  25 lines (18 sloc)  561 Bytes
-
-# -*- coding: utf-8 -*-
-
-# Learn more: https://github.com/kennethreitz/setup.py
-
 from setuptools import setup, find_packages
 
 
@@ -22,9 +12,9 @@ setup(
     version='0.1.0',
     description='Sample package for Python-Guide.org',
     long_description=readme,
-    author='Kenneth Reitz',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Erik Liubakka',
+    author_email='eliubakk@umich.edu',
+    url='https://github.com/eliubakk/consolidate_subdirectories',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )
